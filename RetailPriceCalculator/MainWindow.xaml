@@ -5,8 +5,244 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RetailPriceCalculator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="550" Width="1000">
+    <Window.Resources>
+        <ControlTemplate x:Key="RoundTextboxCornerTemplate" TargetType="{x:Type TextBoxBase}">
+            <Border Background="{TemplateBinding Background}"   
+         x:Name="Bd" BorderBrush="Black"  
+         BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5">
+                <ScrollViewer x:Name="PART_ContentHost"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bd"/>
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="Width" Value="Auto">
+                    <Setter Property="MinWidth" Value="100"/>
+                </Trigger>
+                <Trigger Property="Height" Value="Auto">
+                    <Setter Property="MinHeight" Value="20"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="75"/>
+            <RowDefinition
+                Height="*"/>
+        </Grid.RowDefinitions>
+
+        <DockPanel
+            Grid.Row="0"
+            Background="AliceBlue">
+            <Button
+                Name ="Help_Button"
+                HorizontalAlignment="Left"
+                Content="Help"
+                FontSize="16"
+                Width="100" Click="Help_Button_Click"/>
+            <Label
+                Width="550"
+                FontSize="35"
+                HorizontalContentAlignment="Right"
+                VerticalContentAlignment="Center"
+                Content="Calculate Retail Price In"/>
+            <ComboBox
+                Name="ComboBox_Currency"
+                Width="200"
+                Margin="15"
+                FontSize="28"
+                VerticalContentAlignment="Bottom" >
+                <ComboBoxItem                    
+                    Content="U.S. Dollars"
+                    FontSize="18"
+                    IsSelected="True"
+                    Name="ComboBoxItem_USD"/>
+                <ComboBoxItem
+                    Content="Canadian Dollars"
+                    FontSize="18"
+                    Name="ComboBoxItem_CD" />
+                <ComboBoxItem
+                    Content="Pesos"
+                    FontSize="18"
+                    Name="ComboBoxItem_Pesos"/>
+                <ComboBoxItem
+                    Content="Euros"
+                    FontSize="18"
+                    Name="ComboBoxItem_Euros" />
+
+            </ComboBox>
+            <Button
+                Name="Exit_Button"
+                HorizontalAlignment="Right"
+                FontSize="16"
+                Content="Exit"
+                Width="100" 
+                Click="Exit_Button_Click"/>
+        </DockPanel>
+        <Grid
+            Grid.Row="1"
+            Background="Aqua">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition
+                    Width="2*"/>
+                <ColumnDefinition
+                    Width="4*"/>
+                <ColumnDefinition
+                    Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel
+                Grid.Column="0">
+                <Image                
+                Source="openBox.png"/>
+
+                <Image                
+                Source="closedBox1.png"/>
+            </StackPanel>
+
+            <Grid
+                Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition
+                       Height="*"/>
+                    <RowDefinition
+                       Height="*"/>
+                    <RowDefinition
+                       Height="*"/>
+                    <RowDefinition
+                       Height="*"/>
+                    <RowDefinition
+                       Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition
+                        Width="*"/>
+                    <ColumnDefinition
+                        Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label
+                    Name="Label_InvCost"
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    Content="Cost of Inventory"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right"
+                    Margin="10"
+                    FontSize="20"/>
+                <TextBox 
+                    x:Name="TextBox_InventoryCost"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Template="{StaticResource RoundTextboxCornerTemplate}"
+                    HorizontalAlignment="Left"
+                    VerticalContentAlignment="Center"
+                    Margin="10"
+                    Height="40"
+                    Width="100"/>
+                <Label
+                    Name="Label_AddCost"
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    Content="Additional Costs"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right"
+                    Margin="10"
+                    FontSize="20"/>
+                <TextBox 
+                    x:Name="TextBox_AdditionalCost"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    HorizontalAlignment="Left"
+                    Template="{StaticResource RoundTextboxCornerTemplate}"
+                    VerticalContentAlignment="Center"
+                    Margin="10"
+                    Height="40"
+                    Width="100"/>
+                <Label
+                    Grid.Column="0"
+                    Grid.Row="2"
+                    Content="Units Per Case"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right"
+                    Margin="10"
+                    FontSize="20"/>
+                <TextBox 
+                    x:Name="TextBox_UnitsPerCase"
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    HorizontalAlignment="Left"
+                     VerticalContentAlignment="Center"
+                    Template="{StaticResource RoundTextboxCornerTemplate}"
+                    Margin="10"
+                    Height="40"
+                    Width="100"/>
+                <Label
+                    Grid.Column="0"
+                    Grid.Row="3"
+                    Content="% Markup Desired"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right"
+                    Margin="10"
+                    FontSize="20"/>
+                <TextBox
+                    x:Name="TextBox_Markup"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    HorizontalAlignment="Left"
+                    VerticalContentAlignment="Center"
+                    Template="{StaticResource RoundTextboxCornerTemplate}"
+                    Margin="10"
+                    Height="40"
+                    Width="100"/>
+                <Label
+                    Name="Label_RetialPrice"
+                    Grid.Column="0"
+                    Grid.Row="4"
+                    Content="Retail Price Per Unit"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right"
+                    Margin="10"
+                    FontSize="20"/>
+                <TextBox 
+                    x:Name="TextBox_RetailPrice"
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    FontSize="26"
+                    VerticalContentAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Template="{StaticResource RoundTextboxCornerTemplate}"
+                    Margin="10"
+                    Height="50"
+                    Width="225"/>
+            </Grid>
+
+            <StackPanel
+                Grid.Column="2">
+                <Image 
+                Source="parcel.png"
+                    Height="175"/>
+                <Button
+                    Height="75"
+                    Content="Press to Calculate"
+                    FontSize="28" 
+                    Click="Button_Click"/>
+
+                <Image                 
+                Source="openBox2.png"
+                    Margin="0,10,0,0"
+                    Height="175"/>
+            </StackPanel>
+
+            
+         
+
+           
+            
+
+        </Grid>
+
     </Grid>
 </Window>

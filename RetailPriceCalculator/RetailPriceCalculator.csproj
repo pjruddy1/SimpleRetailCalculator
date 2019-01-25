@@ -55,6 +55,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ImageLocation.cs" />
+    <Compile Include="SolutionWindow.xaml.cs">
+      <DependentUpon>SolutionWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="HelpWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -63,10 +71,17 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="HelpWindow.xaml.cs">
+      <DependentUpon>HelpWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="SolutionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -93,6 +108,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="parcel.png" />
+    <Resource Include="register.jpg" />
+    <Resource Include="shopping1.jpg" />
+    <Resource Include="shopping2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="closedBox1.png" />
+    <Resource Include="openBox.png" />
+    <Resource Include="openBox2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cash.jpg" />
+    <Resource Include="Images\CND_cash.jpg" />
+    <Resource Include="Images\euro.png" />
+    <Resource Include="Images\MEX_cash.jpg" />
+    <Resource Include="Images\sign.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
