@@ -20,7 +20,9 @@ namespace RetailPriceCalculator
     /// </summary>
     public partial class MainWindow : Window
     {
-        string _units;
+        private enum Units { US, CND, MEX, EURO };
+
+        Units _units;
 
         public MainWindow()
         {
@@ -32,32 +34,29 @@ namespace RetailPriceCalculator
         {
             if (IsLoaded)
             {
-                _units = "US $";
+                _units = Units.US;
                 UpdateUnits();
             }
         }
 
         private void UpdateUnits()
         {
-            string currency = ComboBox_Currency.SelectionBoxItem as string;
-
-            switch (currency)
+            if ((bool)ComboBoxItem_USD.IsSelected)
             {
-                case "U.S. Dollars":
-                    _units = "US $";
-                    break;
-                case "Canadian Dollars":
-                    _units = "CND $";
-                    break;
-                case "Pesos":
-                    _units = "Mex $";
-                    break;
-                case "Euros":
-                    _units = "E";
-                    break;
-                default:
-                    break;
+                _units = Units.US;
             }
+            else if ((bool)ComboBoxItem_CD.IsSelected)
+            {
+                _units = Units.CND;
+            }
+            else if ((bool)ComboBoxItem_Pesos.IsSelected)
+            {
+                _units = Units.MEX;
+            }
+            else if ((bool)ComboBoxItem_Euros.IsSelected)
+            {
+                _units = Units.EURO;
+            }            
         }
 
         private void Exit_Button_Click(object sender, RoutedEventArgs e)
@@ -66,22 +65,73 @@ namespace RetailPriceCalculator
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
-        {            
-            double totalCost = double.Parse(TextBox_InventoryCost.Text) + double.Parse(TextBox_AdditionalCost.Text);           
-            double unitsPer = double.Parse(TextBox_UnitsPerCase.Text);
-            double retailMarkup;
-            double retailPerUnit;
-
+        {
+            double retailMarkup = 0;
+            double retailPerUnit = 0;
+            double markUpAmount = 0;
             UpdateUnits();
 
-            retailMarkup = totalCost * (double.Parse(TextBox_Markup.Text) * .01);
-            retailPerUnit = (totalCost + retailMarkup) / unitsPer;
+            if (ValidInputs(out string userFeedback))
+            {
+                
+                retailMarkup = (Convert.ToDouble(TextBox_Markup.Text) * .01);
 
-            TextBox_RetailPrice.Text = _units.ToString() + " "+ retailPerUnit.ToString();
+                markUpAmount = retailMarkup *
+                     (Convert.ToDouble(TextBox_InventoryCost.Text) +
+                     Convert.ToDouble(TextBox_AdditionalCost.Text));
+                    
 
-            SolutionWindow solutionWindow = new SolutionWindow(retailPerUnit, _units);
+                retailPerUnit = (markUpAmount + Convert.ToDouble(TextBox_InventoryCost.Text) +
+                                Convert.ToDouble(TextBox_AdditionalCost.Text)) /
+                                Convert.ToDouble(TextBox_UnitsPerCase.Text);
+            }
+            else
+            {
+                MessageBox.Show(userFeedback);
+            }
+
+            TextBox_RetailPrice.Text = _units.ToString() + " "+ retailPerUnit.ToString("C2");
+
+            SolutionWindow solutionWindow = new SolutionWindow(retailPerUnit, _units.ToString());
 
             solutionWindow.ShowDialog();
+        }
+
+        /// <summary>
+        /// This Code is from John Velis CIT195 NorthwesternMichiganCollege
+        /// validate all inputs and generate a user feedback message if necessary 
+        /// </summary>
+        /// <param name="userFeedback">user feedback message</param>
+        /// <returns>valid inputs status</returns>
+        private bool ValidInputs(out string userFeedback)
+        {
+            bool validInputs = true;
+            userFeedback = "";
+            //
+            // set bool value and build out the user feedback message
+            //
+            if (!double.TryParse(TextBox_InventoryCost.Text, out double invenToryCost ))
+            {
+                validInputs = false;
+                userFeedback += "It appears that the value entered for Length is not a valid number." + Environment.NewLine;
+            }
+            if (!double.TryParse(TextBox_AdditionalCost.Text, out double additionalCost))
+            {
+                validInputs = false;
+                userFeedback += "It appears that the value entered for Width is not a valid number." + Environment.NewLine;
+            }
+            if (!double.TryParse(TextBox_Markup.Text, out double markUp))
+            {
+                validInputs = false;
+                userFeedback += "It appears that the value entered for Height is not a valid number." + Environment.NewLine;
+            }
+            if (!double.TryParse(TextBox_UnitsPerCase.Text, out double unitsPer))
+            {
+                validInputs = false;
+                userFeedback += "It appears that the value entered for Height is not a valid number." + Environment.NewLine;
+            }
+
+            return validInputs;
         }
 
         private void Help_Button_Click(object sender, RoutedEventArgs e)

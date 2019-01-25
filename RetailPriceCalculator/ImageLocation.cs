@@ -8,6 +8,9 @@ namespace RetailPriceCalculator
 {
     public class ImageLocation
     {
+        enum ImageLoc
+        { US, CND, MEX, EURO};
+
         private string _imageName;
 
         public string ImageName
@@ -15,8 +18,6 @@ namespace RetailPriceCalculator
             get { return _imageName; }
             set { _imageName = value; }
         }
-
-
 
     }
 }
