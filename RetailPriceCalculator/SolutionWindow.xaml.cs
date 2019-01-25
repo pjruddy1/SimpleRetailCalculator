@@ -31,6 +31,8 @@ namespace RetailPriceCalculator
             baseValue = DisplayGetBaseValue(_units, retailPerUnit);
             TextBox_SolutionPrice.Text = _units + " " + retailPerUnit;
 
+
+
         }
 
         private double DisplayGetBaseValue(string _units, double retailPerUnit)
@@ -92,10 +94,7 @@ namespace RetailPriceCalculator
             
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
+        
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
