@@ -23,17 +23,55 @@ namespace RetailPriceCalculator
         private enum Units { US, CND, MEX, EURO };
         Units _newUnits;
         double baseValue;
+        private string _imageSourcePath;
+
+        public string ImageSourcePath
+        {
+            get { return _imageSourcePath; }
+            set { _imageSourcePath = value; }
+        }
         public ImageLocation loc { get; set; }
 
         public SolutionWindow(double retailPerUnit, string _units)
         {
-            bool validResponse1;
+            bool validResponse1;           
+
             baseValue = DisplayGetBaseValue(retailPerUnit);
             validResponse1 = Enum.TryParse(_units, out _newUnits);
+            SetImageByCurrency();
             InitializeComponent();
             InitializeWindowElements();
 
             TextBox_SolutionPrice.Text = _units + " " + retailPerUnit.ToString("C2");
+        }
+
+        private void SetImageByCurrency()
+        {
+            string path = "";
+
+            switch (_newUnits)
+            {
+                case Units.US:
+                    path = "./Images/cash.jpg";
+                    break;
+                case Units.CND:
+                    path = "./Images/CND_cash.jpg";
+                    break;
+                case Units.MEX:
+                    path = "./Images/MEX_cash.jpg";
+                    break;
+                case Units.EURO:
+                    path = "./Images/euro.png";
+                    break;
+                default:
+                    break;
+            }
+
+            if(path != "")
+            {
+                ImageSourcePath = path;
+                DataContext = this;
+            }
         }
 
         private double DisplayGetBaseValue(double retailPerUnit)
@@ -95,7 +133,7 @@ namespace RetailPriceCalculator
                 default:
                     break;
             }
-            
+            SetImageByCurrency();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -137,6 +175,7 @@ namespace RetailPriceCalculator
                     default:
                         break;
                 }
+                SetImageByCurrency();
             }
             return newRetailPerUnit;
             

@@ -51,7 +51,7 @@
                 <Image
                     Name="Image_Currency"
                     Width="125"
-                    Source="Images/cash.jpg"/>
+                    Source="{Binding ImageSourcePath}"/>
 
                 <StackPanel
                     Width="125">
