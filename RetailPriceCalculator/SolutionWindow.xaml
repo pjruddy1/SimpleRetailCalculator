@@ -39,7 +39,7 @@
                     Height="1*"/>
             </Grid.RowDefinitions>
             <Label
-                Height="50"
+                Height="35"
                 FontSize="16"
                 Content="This is the Reatail Price Per Unit"
                 HorizontalContentAlignment="Center"
@@ -70,7 +70,8 @@
                         HorizontalContentAlignment="Left"
                         Content="Convert Currency"/>
                     <ComboBox
-                        Name="ComboBox_NewCurrency">
+                        Name="ComboBox_NewCurrency"
+                        BorderBrush="Black">
                         <ComboBoxItem
                         Name="ComboBoxItem_USD"
                         IsSelected="{Binding SolutionWindow.validResponse1}"
@@ -94,14 +95,16 @@
                     </ComboBox>
                     <Button
                         Height="30"
+                        BorderBrush="Black"
                         VerticalAlignment="Bottom"
                         Margin="0,50,0,0"
-                        Content="Convert" Click="Button_Click_1"></Button>
+                        Content="Convert" 
+                        Click="Button_Click_1"></Button>
                     
                 </StackPanel>
                 <Image
                     Source="Images/sign.png"
-                    Width="145"
+                    Width="135"
                     Margin="5,0,0,0"/>
 
             </StackPanel>
@@ -110,6 +113,7 @@
                 Grid.Row="2"
                 Height="35"
                 Width="75"
+                BorderBrush="Black"
                 Content="EXIT"
                 FontSize="16"
                 Click="Button_Click"/>

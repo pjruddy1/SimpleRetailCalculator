@@ -39,6 +39,7 @@
             Grid.Row="0"
             Background="AliceBlue">
             <Button
+                BorderBrush="Black"
                 Name ="Help_Button"
                 HorizontalAlignment="Left"
                 Content="Help"
@@ -47,6 +48,7 @@
             <Label
                 Width="550"
                 FontSize="35"
+                BorderBrush="Black"
                 HorizontalContentAlignment="Right"
                 VerticalContentAlignment="Center"
                 Content="Calculate Retail Price In"/>
@@ -79,6 +81,7 @@
                 Name="Exit_Button"
                 HorizontalAlignment="Right"
                 FontSize="16"
+                BorderBrush="Black"
                 Content="Exit"
                 Width="100" 
                 Click="Exit_Button_Click"/>
@@ -226,6 +229,7 @@
                     Height="175"/>
                 <Button
                     Height="75"
+                    Margin="0,0,5,0"
                     Content="Press to Calculate"
                     FontSize="28" 
                     Click="Button_Click"/>

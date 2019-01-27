@@ -38,7 +38,9 @@ namespace RetailPriceCalculator
                 UpdateUnits();
             }
         }
-
+        //
+        //Set currency units
+        //
         private void UpdateUnits()
         {
             if ((bool)ComboBoxItem_USD.IsSelected)
@@ -63,7 +65,10 @@ namespace RetailPriceCalculator
         {
             Environment.Exit(0);
         }
-
+        //
+        // calculations for calculate button
+        // validation of values also included
+        //
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             double retailMarkup = 0;
@@ -84,17 +89,19 @@ namespace RetailPriceCalculator
                 retailPerUnit = (markUpAmount + Convert.ToDouble(TextBox_InventoryCost.Text) +
                                 Convert.ToDouble(TextBox_AdditionalCost.Text)) /
                                 Convert.ToDouble(TextBox_UnitsPerCase.Text);
+
+                TextBox_RetailPrice.Text = _units.ToString() + " " + retailPerUnit.ToString("C2");
+
+                SolutionWindow solutionWindow = new SolutionWindow(retailPerUnit, _units.ToString());
+
+                solutionWindow.ShowDialog();
             }
             else
             {
                 MessageBox.Show(userFeedback);
             }
 
-            TextBox_RetailPrice.Text = _units.ToString() + " "+ retailPerUnit.ToString("C2");
-
-            SolutionWindow solutionWindow = new SolutionWindow(retailPerUnit, _units.ToString());
-
-            solutionWindow.ShowDialog();
+            
         }
 
         /// <summary>
@@ -113,22 +120,22 @@ namespace RetailPriceCalculator
             if (!double.TryParse(TextBox_InventoryCost.Text, out double invenToryCost ))
             {
                 validInputs = false;
-                userFeedback += "It appears that the value entered for Length is not a valid number." + Environment.NewLine;
+                userFeedback += "The value entered for Inventory Cost is not a valid number." + Environment.NewLine;
             }
             if (!double.TryParse(TextBox_AdditionalCost.Text, out double additionalCost))
             {
                 validInputs = false;
-                userFeedback += "It appears that the value entered for Width is not a valid number." + Environment.NewLine;
+                userFeedback += "The value entered for Additional Cost is not a valid number." + Environment.NewLine;
             }
             if (!double.TryParse(TextBox_Markup.Text, out double markUp))
             {
                 validInputs = false;
-                userFeedback += "It appears that the value entered for Height is not a valid number." + Environment.NewLine;
+                userFeedback += "The value entered for Percent Mark-up is not a valid number." + Environment.NewLine;
             }
             if (!double.TryParse(TextBox_UnitsPerCase.Text, out double unitsPer))
             {
                 validInputs = false;
-                userFeedback += "It appears that the value entered for Height is not a valid number." + Environment.NewLine;
+                userFeedback += "The value entered for Units Per Case is not a valid number." + Environment.NewLine;
             }
 
             return validInputs;

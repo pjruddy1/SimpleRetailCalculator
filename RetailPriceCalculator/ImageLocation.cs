@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace RetailPriceCalculator
 {
+    /// <summary>
+    /// Didnt end up using
+    /// but just left it here
+    /// 
+    /// </summary>
     public class ImageLocation
     {
         enum ImageLoc

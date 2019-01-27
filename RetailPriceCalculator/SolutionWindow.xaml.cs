@@ -25,6 +25,10 @@ namespace RetailPriceCalculator
         double baseValue;
         private string _imageSourcePath;
 
+        //
+        // Richie Tarkowski provided help with this code
+        // Setting Currency picture from the original currency coming into the solution window
+        //
         public string ImageSourcePath
         {
             get { return _imageSourcePath; }
@@ -45,6 +49,10 @@ namespace RetailPriceCalculator
             TextBox_SolutionPrice.Text = _units + " " + retailPerUnit.ToString("C2");
         }
 
+        //
+        // Richie Tarkowski provided help with this code
+        // Setting Currency picture from the original currency coming into the solution window
+        //
         private void SetImageByCurrency()
         {
             string path = "";
@@ -74,6 +82,9 @@ namespace RetailPriceCalculator
             }
         }
 
+        //
+        // allows user to convert back and forth from currencys
+        //
         private double DisplayGetBaseValue(double retailPerUnit)
         {
             double baseValue = 0;
@@ -111,29 +122,31 @@ namespace RetailPriceCalculator
         private void UpdateUnits()
         {
             ImageLocation loc = new ImageLocation();
+            //
+            // John Velis provided help with the Image.Source String
+            //
             switch (_newUnits)
             {
                 case Units.US:
                     ComboBox_NewCurrency.SelectedItem = ComboBoxItem_USD.IsEnabled;
-                    loc.ImageName = "/RetialPriceCalculator;component/Images/CND_cash.jpg";
+                    Image_Currency.Source = new BitmapImage(new Uri(@"/Images/cash.jpg", UriKind.Relative));
                     break;
                 case Units.CND:
                     ComboBox_NewCurrency.SelectedItem = ComboBoxItem_CND.IsEnabled;
-                    loc.ImageName = "/RetialPriceCalculator;component/Images/CND_cash.jpg";
-                    
+                    Image_Currency.Source = new BitmapImage(new Uri(@"/Images/CND_cash.jpg", UriKind.Relative));
+
                     break;
                 case Units.MEX:
                     ComboBox_NewCurrency.SelectedItem = ComboBoxItem_MXC.IsEnabled;
-                    loc.ImageName = "/RetialPriceCalculator;component/Images/MEX_cash.jpg";
+                    Image_Currency.Source = new BitmapImage(new Uri(@"/Images/MEX_cash.jpg", UriKind.Relative));
                     break;
                 case Units.EURO:
                     ComboBox_NewCurrency.SelectedItem = ComboBoxItem_Euro.IsEnabled;
-                    loc.ImageName = "/RetialPriceCalculator;component/Images/euro.png";
+                    Image_Currency.Source = new BitmapImage(new Uri(@"/Images/euro.png", UriKind.Relative));
                     break;
                 default:
                     break;
             }
-            SetImageByCurrency();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -147,6 +160,9 @@ namespace RetailPriceCalculator
             TextBox_SolutionPrice.Text = _newUnits.ToString() + " " + newRetailPerUnit.ToString("C2");
         }
 
+        //
+        //Updates currency image value and string
+        //
         private double UpdateCurrency()
         {
             double newRetailPerUnit = 0;
@@ -158,24 +174,24 @@ namespace RetailPriceCalculator
                 {
                     case Units.US:
                         newRetailPerUnit = baseValue;
-                        loc.ImageName = "/RetialPriceCalculator;component/Images/cash.jpg";
+                        Image_Currency.Source = new BitmapImage(new Uri(@"/Images/cash.jpg", UriKind.Relative));
                         break;
                     case Units.CND:
                         newRetailPerUnit = baseValue * 1.331;
-                        loc.ImageName = "/RetialPriceCalculator;component/Images/CND_cash.jpg";
+                        Image_Currency.Source = new BitmapImage(new Uri(@"/Images/CND_cash.jpg", UriKind.Relative));
                         break;
                     case Units.MEX:
                         newRetailPerUnit = baseValue * 18.98;
-                        loc.ImageName = "/RetialPriceCalculator;component/Images/MEX_cash.jpg";
+                        Image_Currency.Source = new BitmapImage(new Uri(@"/Images/MEX_cash.jpg", UriKind.Relative));
                         break;
                     case Units.EURO:
                         newRetailPerUnit = baseValue * .8832;
-                        loc.ImageName = "/RetialPriceCalculator;component/Images/euro.png";
+                        Image_Currency.Source = new BitmapImage(new Uri(@"/Images/euro.png", UriKind.Relative));
                         break;
                     default:
                         break;
                 }
-                SetImageByCurrency();
+                
             }
             return newRetailPerUnit;
             

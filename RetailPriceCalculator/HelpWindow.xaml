@@ -5,36 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RetailPriceCalculator"
         mc:Ignorable="d"
-        Title="HelpWindow" Height="350" Width="800"
+        Title="HelpWindow" Height="250" Width="700"
         Background="AliceBlue">
-    <Window.Resources>
-        <ControlTemplate x:Key="RoundTextboxCornerTemplate" TargetType="{x:Type TextBoxBase}">
-            <Border Background="{TemplateBinding Background}"   
-         x:Name="Bd" BorderBrush="Black"  
-         BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5">
-                <ScrollViewer x:Name="PART_ContentHost"/>
-            </Border>
-            <ControlTemplate.Triggers>
-                <Trigger Property="IsEnabled" Value="False">
-                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bd"/>
-                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                </Trigger>
-                <Trigger Property="Width" Value="Auto">
-                    <Setter Property="MinWidth" Value="100"/>
-                </Trigger>
-                <Trigger Property="Height" Value="Auto">
-                    <Setter Property="MinHeight" Value="20"/>
-                </Trigger>
-            </ControlTemplate.Triggers>
-        </ControlTemplate>
-    </Window.Resources>
+
 
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition
                 Width="203*"/>
             <ColumnDefinition
-                Width="589*"/>
+                Width="489*"/>
         </Grid.ColumnDefinitions>
         <StackPanel
             Grid.Column="0">
@@ -80,19 +60,19 @@
                 Width="50"
                 Height="25"
                 Content="EXIT"
-                Margin="74" Click="Button_Click"/>
+                BorderBrush="Black"
+                Margin="20" Click="Button_Click"/>
         </StackPanel>
         <TextBox
             Grid.Column="1"
             Name ="Label_HelpLabel"
-            Height="83"
-            Width="569"
-            Template="RoundTextboxCornerTemplate"
-            FontSize="18"
+            Height="80"
+            Width="469"
+            FontSize="12"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
             HorizontalContentAlignment="Left"
             VerticalContentAlignment="Top"
-            Margin="10,95,10,141"/>
+            />
     </Grid>
 </Window>
