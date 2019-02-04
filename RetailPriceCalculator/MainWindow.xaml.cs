@@ -79,15 +79,14 @@ namespace RetailPriceCalculator
             if (ValidInputs(out string userFeedback))
             {
                 
-                retailMarkup = (Convert.ToDouble(TextBox_Markup.Text) * .01);
+                retailMarkup = 1 - (Convert.ToDouble(TextBox_Markup.Text) * .01);
 
-                markUpAmount = retailMarkup *
+                markUpAmount = 
                      (Convert.ToDouble(TextBox_InventoryCost.Text) +
-                     Convert.ToDouble(TextBox_AdditionalCost.Text));
+                     Convert.ToDouble(TextBox_AdditionalCost.Text)) / retailMarkup;
                     
 
-                retailPerUnit = (markUpAmount + Convert.ToDouble(TextBox_InventoryCost.Text) +
-                                Convert.ToDouble(TextBox_AdditionalCost.Text)) /
+                retailPerUnit = markUpAmount /
                                 Convert.ToDouble(TextBox_UnitsPerCase.Text);
 
                 TextBox_RetailPrice.Text = _units.ToString() + " " + retailPerUnit.ToString("C2");

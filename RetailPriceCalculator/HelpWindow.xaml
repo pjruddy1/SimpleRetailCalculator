@@ -7,7 +7,27 @@
         mc:Ignorable="d"
         Title="HelpWindow" Height="250" Width="700"
         Background="AliceBlue">
-
+    <Window.Resources>
+        <ControlTemplate x:Key="RoundTextboxCornerTemplate" TargetType="{x:Type TextBoxBase}">
+            <Border Background="{TemplateBinding Background}"   
+         x:Name="Bd" BorderBrush="Black"  
+         BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5">
+                <ScrollViewer x:Name="PART_ContentHost"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bd"/>
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="Width" Value="Auto">
+                    <Setter Property="MinWidth" Value="100"/>
+                </Trigger>
+                <Trigger Property="Height" Value="Auto">
+                    <Setter Property="MinHeight" Value="20"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -64,12 +84,12 @@
                 Margin="20" Click="Button_Click"/>
         </StackPanel>
         <TextBox
+            
             Grid.Column="1"
             Name ="Label_HelpLabel"
             Height="80"
             Width="469"
             FontSize="12"
-            VerticalAlignment="Center"
             HorizontalAlignment="Center"
             HorizontalContentAlignment="Left"
             VerticalContentAlignment="Top"
